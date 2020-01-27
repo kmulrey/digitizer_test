@@ -15,8 +15,8 @@
 #include "Scope.h"
 #include "Socket.h"
 
-#define    PORT1    3313
-#define    PORT2    3314
+#define    PORT1    8082
+#define    PORT2    8083
 int dtime=2;
 
 shm_struct shm_ev; //!< shared memory containing all event info, including read/write pointers
@@ -41,7 +41,7 @@ socket_connection sock_send;
 
 int main(int argc,char **argv){
     
-
+    ///*  remove for testing
     
     if(ad_shm_create(&shm_ev,BUFSIZE,sizeof(EV_DATA)/sizeof(uint16_t)) <0){ //ad_shm_create is in shorts!
         printf("Cannot create EVENT shared memory !!\n");
@@ -66,7 +66,7 @@ int main(int argc,char **argv){
     //gpsbuf2 = (EV_DATA *) shm_ev.Ubuf;
     
 
-
+  
     
     
     time_t time1,time2 ;
@@ -76,38 +76,41 @@ int main(int argc,char **argv){
     int r=0;
     
     initialize_parameter_lists();
-    //printf("checking initialization: %04x\n",ch_property_params[0][0]);
+    printf("checking initialization: %04x\n",ch_property_params[0][0]);
     sock_send.port=PORT1;
     sock_listen.port=PORT2;
     
-    make_socket(&sock_send);
     
+    sleep(5);
+    printf("____________________________________________\n");
+    printf("making socket to send\n");
+    make_socket(&sock_send);
     r=connect_socket(&sock_send);
+    
+    sleep(5);
+    printf("____________________________________________\n");
+    printf("making socket to listen\n");
     make_socket(&sock_listen);
     r=connect_socket(&sock_listen);
-    
+    printf("____________________________________________\n");
+
     
     if(r>=0){
-    
-    
-    
-    end_param=0;
-    error_count=0;
-    int r=0;
-    
-    func_write_auto(sock_send.sockfd);
+        end_param=0;
+        error_count=0;
+        int t=0;
 
-    while(end_param<1){
-    
-        r=func_read_message(sock_listen.sockfd);
-        //printf("%d\n",r);
-        if(end_param==1){
+        //get control parameters
+       while(end_param<1){
+         r=func_read_message(sock_listen.sockfd);
+         if(end_param==1){
             printf("received message to finish control messages\n");
         }
         
         
-    }
-
+       }
+        
+    
     int i;
     
     printf("mode parameters: {");
@@ -168,7 +171,6 @@ int main(int argc,char **argv){
     printf("}\n");
     
     
-    
   
     printf("starting scope related things......\n");
     
@@ -177,14 +179,9 @@ int main(int argc,char **argv){
     ls_get_station_id();
 
     scope_main();
-    
-    
-    printf("out of main!\n");
-    
 
-    
     }
-    
+
     //sleep(10);
     close(sock_send.sockfd);
     close(sock_listen.sockfd);

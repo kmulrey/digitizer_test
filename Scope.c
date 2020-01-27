@@ -273,7 +273,7 @@ int scope_read(int ioff)
         //printf("raw buff: %x\n",rawbuf[2]);
         printf("----->PPS \n");
         if(evgps>0){
-            //printf("gps number:    %lu\n",sizeof(gpsbuf[evgps-1].buf));
+            printf("gps number:    %lu\n",sizeof(gpsbuf[evgps-1].buf));
             Write_Data(sock_send.sockfd,gpsbuf[evgps-1].buf,sizeof(gpsbuf[evgps-1].buf));
 
         }
@@ -292,15 +292,18 @@ int scope_read(int ioff)
     {
         ir=scope_read_event(ioff);
         printf("----->EVENT!!!!  ");
-        
+        printf(" event size: %lu\n",sizeof(gpsbuf2[*(shm_ev.next_write)-1].buf));
         //Write_Data(sock_send.sockfd,rawbuf);
         if(*(shm_ev.next_write)>0){
             //trigg=check_trigger(gpsbuf2[*(shm_ev.next_write)-1].buf);
 
            // printf("event number:    %d  %x  %x  %x\n",*(shm_ev.next_write),gpsbuf2[*(shm_ev.next_write)-1].buf[0],gpsbuf2[*(shm_ev.next_write)-1].buf[1],gpsbuf2[*(shm_ev.next_write)-1].buf[2]);
-            if(gpsbuf2[*(shm_ev.next_write)-1].trigger_flag>=trigger_condition[0]){
-                printf("-sent  ");
-                Write_Data(sock_send.sockfd,gpsbuf2[*(shm_ev.next_write)-1].buf,sizeof(gpsbuf2[*(shm_ev.next_write)-1].buf));
+            if(gpsbuf2[*(shm_ev.next_write)-1].trigger_flag>=trigger_condition){
+                //printf("-sent  (end chars) %x  %x",gpsbuf2[*(shm_ev.next_write)-1].buf[70+1504],gpsbuf2[*(shm_ev.next_write)-1].buf[70+1505]);
+                printf("-sent \n");
+                //Write_Data(sock_send.sockfd,gpsbuf2[*(shm_ev.next_write)-1].buf,sizeof(gpsbuf2[*(shm_ev.next_write)-1].buf));
+                Write_Data(sock_send.sockfd,gpsbuf2[*(shm_ev.next_write)-1].buf,20000);//1576
+
             }
             printf("\n");
         }
@@ -745,6 +748,9 @@ int check_trigger(uint8_t *buf){
 
 void scope_main()
 {
+    //uint8_t buff[200];
+
+    
     scope_open();
     uint8_t buff[200];
     uint32_t length = sizeof(buff);
@@ -767,48 +773,8 @@ void scope_main()
     }
     
 
- /*
+ 
     
-    for(i=0; i<5;i++){
-        printf("________%d_______\n",i);
-        
-    }
-    */
-    /*
-    printf("event number: %d \n",gpsbuf2[0].event_nr);
-    printf("event number: %d \n",gpsbuf2[1].event_nr);
-    
-    printf("event size: %d \n",gpsbuf2[0].evsize);
-    printf("event size: %d \n",gpsbuf2[1].evsize);
-
-    
-    printf("event CTD: %d \n",gpsbuf2[0].CTD);
-    printf("event CTD: %d \n",gpsbuf2[1].CTD);
-    
-    printf("event buff 1,2,3: %d  %d  %d \n",gpsbuf2[0].buf[0],gpsbuf2[0].buf[1],gpsbuf2[0].buf[10]);
-    printf("event buff 1,2,3: %d  %d  %d  \n",gpsbuf2[1].buf[0],gpsbuf2[1].buf[1],gpsbuf2[1].buf[10]);
-    */
-    /*
-    FILE *fptr;
-    fptr=fopen("test3.txt","w");
-    
-    for(i=0; i<MAX_READOUT; i++){
-        fprintf(fptr,"%x\n",gpsbuf2[8].buf[i]);
-    }
-    
-    
-    
-    fclose(fptr);
-     */
-    
-    /*
-     for(i=0; i<PARAM_LIST_MAXSIZE; i++){
-     printf("shadow: %04x, %04x, %04x, %04x, %04x, %04x, %04x, %04x, %04x, %04x\n",shadowlistR[1][i],shadowlistR[2][i],shadowlistR[3][i],shadowlistR[4][i],shadowlistR[8][i],shadowlistR[9][i],shadowlistR[10][i],shadowlistR[11][i],shadowlistR[12][i],shadowlistR[13][i]); //!< all parameters read from FPGA
-     }
-     */
-    //scope_write((uint8_t *)ctrllist,sizeof(ctrllist));
-    //usleep(1000);
-    // scope_close();
     
     
     sleep(2);
@@ -816,12 +782,10 @@ void scope_main()
     /////////////// loop with main PC
     
   
-    //char filename[]="test_data/test1.txt";
-    //read_fake_file(filename);
-    
     int c1=0;
     int r;
     unsigned char buff0[100];
+    
     bzero(buff, sizeof(buff));
     buff0[0]=0;//x99;
     struct timeval stop, start,start0;
@@ -832,7 +796,7 @@ void scope_main()
     gettimeofday(&start0, NULL);
 
     while(1){
-
+        
         scope_read(1);
 
         
@@ -852,20 +816,15 @@ void scope_main()
         gettimeofday(&stop, NULL);
         dur= (double) (stop.tv_sec - start.tv_sec) * 1000 + (double) (stop.tv_usec - start.tv_usec) / 1000;
         dur0= (double) (stop.tv_sec - start0.tv_sec) * 1000 + (double) (stop.tv_usec - start0.tv_usec) / 1000;
-
+        /*
         if(dur>1500.0){
             Write_Data(sock_send.sockfd,buff0,1);
             gettimeofday(&start, NULL);
             //printf(".............\n");
 
         }
-      
-    /*
-        if(dur0>10000){
-            printf("................time's up................\n");
-            break;
-        }
-     */
+      */
+
         ///////////////////////////
       
     }

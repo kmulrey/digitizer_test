@@ -313,7 +313,7 @@ uint8_t shadowlist[PARAM_NUM_LIST][PARAM_LIST_MAXSIZE];  //!< all parameters to 
 uint8_t shadowlistR[PARAM_NUM_LIST][PARAM_LIST_MAXSIZE]; //!< all parameters read from FPGA
 //int32_t shadow_filled = 0;                               //!< the shadow list is not filled
 
-uint8_t trigger_condition[4];
+uint8_t trigger_condition;
 
 uint16_t dig_mode_params[LEN_MODE_PARAM];
 uint16_t readout_window_params[LEN_READOUT_PARAM];

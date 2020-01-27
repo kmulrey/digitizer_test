@@ -38,8 +38,9 @@ void make_socket(socket_connection* sock){
     //sock->servaddr.sin_addr.s_addr = inet_addr("192.168.61.100");
     //sock->servaddr.sin_addr.s_addr = inet_addr("192.168.56.99");
     //sock->servaddr.sin_addr.s_addr = inet_addr("172.18.1.100");
-    sock->servaddr.sin_addr.s_addr = inet_addr("192.168.88.1");
-    
+    //sock->servaddr.sin_addr.s_addr = inet_addr("192.168.88.1");
+    sock->servaddr.sin_addr.s_addr = inet_addr("192.168.40.100");
+
     sock->servaddr.sin_port = htons(sock->port);
     
 
@@ -156,9 +157,9 @@ int func_read_message(int sockfd1)
         //printf("    message header not recognized: %x\n",buff[0]);
     }
     if(buff[0]==0x99){
-        //printf("start new message: %x\n",buff[0]);
-        //printf("message type: %x\n",buff[1]);
-        if(buff[1]==0xaa){
+        printf("start new message: %x\n",buff[0]);
+        printf("message type: %x\n",buff[1]);
+        if(buff[1]==0xAA){
             exit=1;
             //printf("received exit message\n");
         }

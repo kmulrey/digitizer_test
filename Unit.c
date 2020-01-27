@@ -85,22 +85,26 @@ void build_property_ctrlist(char *buff, int32_t size){
        // ch_HV[ch]=i= buff[3] << 8 | buff[4];
         ch_HV[ch]= buff[3] << 8 | buff[4];
         printf("          --> %d: \n",ch_HV[ch]);
-        trigger_condition[ch]=buff[5];
-        ch_property_params[ch][2]= buff[10] << 8 | buff[11];  // gain correction
-        ch_property_params[ch][3]= buff[12] << 8 | buff[13];  // offset correction, integration time
-        ch_property_params[ch][4]= buff[14] << 8 | buff[15];   // base max
-        ch_property_params[ch][5]= buff[16] << 8 | buff[17];  // base min
+        //trigger_condition[ch]=buff[5];
+        ch_property_params[ch][2]= buff[9] << 8 | buff[10];  // gain correction
+        ch_property_params[ch][3]= buff[11] << 8 | buff[12];  // offset correction, integration time
+        ch_property_params[ch][4]= buff[13] << 8 | buff[14];   // base max
+        ch_property_params[ch][5]= buff[15] << 8 | buff[16];  // base min
  
-        readout_window_params[2*(ch)+2]=buff[6] << 8 | buff[7];
-        readout_window_params[2*(ch)+3]=buff[8] << 8 | buff[9];
+        readout_window_params[2*(ch)+2]=buff[5] << 8 | buff[6];
+        readout_window_params[2*(ch)+3]=buff[7] << 8 | buff[8];
+        
+        printf("pre-coincidence time: %d\n",readout_window_params[2*(ch)+2]);
         
         
-        ch_trigger_params[ch][2]= buff[18] << 8 | buff[19];    // signal threshold T1
-        ch_trigger_params[ch][3]= buff[20] << 8 | buff[21];    // noise threshold T2
-        ch_trigger_params[ch][4]= buff[22] << 8 | buff[23];    // t_prev (n*5ns)
-        ch_trigger_params[ch][5]= buff[24] << 8 | buff[25];    // tcmax (n*5ns)
-        ch_trigger_params[ch][6]= buff[26] << 8 | buff[27];    // ncmin
-        ch_trigger_params[ch][7]= 1 << 8 | buff[28];    // qmin
+        ch_trigger_params[ch][2]= buff[17] << 8 | buff[18];    // signal threshold T1
+        printf("T1: %d\n",ch_trigger_params[ch][2]);
+
+        ch_trigger_params[ch][3]= buff[19] << 8 | buff[20];    // noise threshold T2
+        ch_trigger_params[ch][4]= buff[21] << 8 | buff[22];    // t_prev (n*5ns) +t_per
+        ch_trigger_params[ch][5]= buff[23] << 8 | buff[24];    // tcmax (n*5ns) +ncmax
+        ch_trigger_params[ch][6]= buff[25] << 8 | buff[26];    // ncmin + qmax
+        ch_trigger_params[ch][7]= 1 << 8 | buff[27];    // qmin
  
     }
     
@@ -115,11 +119,12 @@ void build_mode_ctrlist(char *buff, int32_t size){
     
     //printf("building mode param list %04x: \n",buff[1]);
     //printf("buffer size %d: \n",size);
-    
-    dig_mode_params[2]= buff[3] << 8 | buff[4]; // control register
-    dig_mode_params[3]= buff[5] << 8 | buff[6]; // trigger enable mask
-    dig_mode_params[4]= buff[7] << 8 | buff[8]; // ch mask, trigger rate divider
-    dig_mode_params[5]= buff[9] << 8 | buff[10]; // common coincidence readout
+    //trigger_condition=
+    dig_mode_params[2]= buff[2] << 8 | buff[3]; // control register
+    dig_mode_params[3]= buff[4] << 8 | buff[5]; // trigger enable mask
+    dig_mode_params[4]= buff[6] << 8 | buff[7]; // ch mask, trigger rate divider
+    dig_mode_params[5]= buff[8] << 8 | buff[9]; // common coincidence readout
+    trigger_condition=buff[10]; //how many channels required for trigger
     dig_mode_params[6]=0x00;
     dig_mode_params[7]=0x00;
 
