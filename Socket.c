@@ -38,8 +38,8 @@ void make_socket(socket_connection* sock){
     //sock->servaddr.sin_addr.s_addr = inet_addr("192.168.61.100");
     //sock->servaddr.sin_addr.s_addr = inet_addr("192.168.56.99");
     //sock->servaddr.sin_addr.s_addr = inet_addr("172.18.1.100");
-    //sock->servaddr.sin_addr.s_addr = inet_addr("192.168.88.1");
-    sock->servaddr.sin_addr.s_addr = inet_addr("192.168.40.100");
+    sock->servaddr.sin_addr.s_addr = inet_addr("192.168.88.1");
+    //sock->servaddr.sin_addr.s_addr = inet_addr("192.168.40.100");
 
     sock->servaddr.sin_port = htons(sock->port);
     

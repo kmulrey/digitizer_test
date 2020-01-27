@@ -15,8 +15,8 @@
 #include "Scope.h"
 #include "Socket.h"
 
-#define    PORT1    8082
-#define    PORT2    8083
+#define    PORT1    3311
+#define    PORT2    3312
 int dtime=2;
 
 shm_struct shm_ev; //!< shared memory containing all event info, including read/write pointers
