@@ -321,7 +321,7 @@ uint16_t ch_property_params[4][LEN_CH_PROPERTY_PARAM];
 uint16_t ch_trigger_params[4][LEN_CH_TRIGGER_PARAM];
 
 int ch_HV[4];
-
+int event_len;
 
 
 void ls_get_station_id();

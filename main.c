@@ -15,8 +15,8 @@
 #include "Scope.h"
 #include "Socket.h"
 
-#define    PORT1    3319
-#define    PORT2    3320
+#define    PORT1    3317
+#define    PORT2    3318
 int dtime=2;
 
 shm_struct shm_ev; //!< shared memory containing all event info, including read/write pointers
@@ -170,8 +170,8 @@ int main(int argc,char **argv){
     }
     printf("}\n");
     
-    
-  
+    event_len=8*(readout_window_params[6]+dig_mode_params[5]+readout_window_params[7])+72;
+    printf("total event length = 72+ 8x(%d + %d + %d) = %d\n", readout_window_params[6],dig_mode_params[5],readout_window_params[7],event_len);
     printf("starting scope related things......\n");
     
     

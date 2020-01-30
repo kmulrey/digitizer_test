@@ -156,7 +156,7 @@ void scope_set_parameters(uint16_t *data, int to_shadow)
     for(i=0;i<data[1]/2;++i) printf(" %04x",data[i]);
     printf("\n");
     i=(data[0]>>8)&0xff;
-    //if(to_shadow == 1) printf("To Shadow: %d %d\n",i,data[1]);
+      if(to_shadow == 1) printf("To Shadow: %d %d\n",i,data[1]);
     //if(i<=PARAM_NUM_LIST && i> 0 && data[1]<=PARAM_LIST_MAXSIZE && data[1]>0){
     if(sizeof(data)>0){
         
@@ -273,7 +273,7 @@ int scope_read(int ioff)
         //printf("raw buff: %x\n",rawbuf[2]);
         printf("----->PPS \n");
         if(evgps>0){
-            printf("gps number:    %lu\n",sizeof(gpsbuf[evgps-1].buf));
+            //printf("gps number:    %lu\n",sizeof(gpsbuf[evgps-1].buf));
             Write_Data(sock_send.sockfd,gpsbuf[evgps-1].buf,sizeof(gpsbuf[evgps-1].buf));
 
         }
@@ -292,7 +292,7 @@ int scope_read(int ioff)
     {
         ir=scope_read_event(ioff);
         printf("----->EVENT!!!!  ");
-        printf(" event size: %lu\n",sizeof(gpsbuf2[*(shm_ev.next_write)-1].buf));
+        //printf(" event size: %lu\n",sizeof(gpsbuf2[*(shm_ev.next_write)-1].buf));
         //Write_Data(sock_send.sockfd,rawbuf);
         if(*(shm_ev.next_write)>0){
             //trigg=check_trigger(gpsbuf2[*(shm_ev.next_write)-1].buf);
@@ -303,7 +303,24 @@ int scope_read(int ioff)
                 printf("-sent \n");
                 //Write_Data(sock_send.sockfd,gpsbuf2[*(shm_ev.next_write)-1].buf,sizeof(gpsbuf2[*(shm_ev.next_write)-1].buf));
                 Write_Data(sock_send.sockfd,gpsbuf2[*(shm_ev.next_write)-1].buf,20000);//1576
-
+                int p;
+                /*
+                for(p=0; p<1000; p++){
+                    
+                    if((p<event_len+500)){
+                        
+                        if(p==(event_len-1) || p==(event_len-2)){
+                            printf("%d %x   <------\n",p,gpsbuf2[*(shm_ev.next_write)-1].buf[p]);
+                        }
+                        else{
+                            printf("%d %x\n",p,gpsbuf2[*(shm_ev.next_write)-1].buf[p]);
+                        }
+                         
+                    }
+                    
+                }
+                */
+                
             }
             printf("\n");
         }
@@ -315,16 +332,6 @@ int scope_read(int ioff)
         
     }
     
-    
-    
-    
-    
-    
-    
-    
-    //else if(rawbuf[1] == ID_PARAM_ERROR) return(scope_read_error(ioff));
-   // printf("ERROR Identifier = %x\n",rawbuf[1]);
-  //  return(-3);
     else{// bad identifier read
         return 0;}
 }
