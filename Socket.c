@@ -152,7 +152,7 @@ int func_read_message(int sockfd1)
     bzero(buff, MAX);
     len=read(sockfd1, buff, sizeof(buff));
 
-   // printf("\n\n    From server (%d): %x,  %x,  %x\n", sizeof(buff),buff[0],buff[1],buff[2]);
+    printf("From server (%d)\n", len);
     
     if(buff[0]!=0x99){
         //printf("    message header not recognized: %x\n",buff[0]);
