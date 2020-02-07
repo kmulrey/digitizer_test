@@ -150,14 +150,14 @@ int func_read_message(int sockfd1)
     char buff[MAX];
     int len=0;
     bzero(buff, MAX);
-    len=read(sockfd1, buff, sizeof(buff)-1);
+    read(sockfd1, buff, sizeof(buff));
     
-    if(len=0){
-        printf("\n\nserver disconnected!!\n\n");
-        end_param=1;
-    }
+    //if(len=0){
+    //    printf("\n\nserver disconnected!!\n\n");
+    //    end_param=1;
+   // }
 
-    printf("From server (%d)\n", len);
+    //printf("From server (%d)\n", len);
     
     if(buff[0]!=0x99){
         //printf("    message header not recognized: %x\n",buff[0]);
