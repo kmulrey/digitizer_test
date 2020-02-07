@@ -322,7 +322,7 @@ int scope_read(int ioff)
                 */
                 
             }
-            printf("\n");
+            //printf("\n");
         }
         int e;
        
