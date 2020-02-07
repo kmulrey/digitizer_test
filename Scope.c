@@ -29,7 +29,7 @@
 DEV dev = 0;                    //!< Device id
 int station_id;
 int nCh=4;
-
+int cumulative_triggers=0;
 
 #define MAXTRY 50               //!< maximal number of loops to complete reading from the FPGA
 #define UPDATESEC 100           //!< time interval between succesive rate checks. Only used in dynamic monitoring of rate.
@@ -283,7 +283,7 @@ int scope_read(int ioff)
         unsigned short trigger_rate=0;
         trigger_rate=gpsbuf[evgps-1].buf[25]<<8 | gpsbuf[evgps-1].buf[24] ;
         printf("triggers this second:  %d\n",(int)trigger_rate);
-        
+        cumulative_triggers=cumulative_triggers+trigger_rate;
         
        
         return(ir);
@@ -825,11 +825,12 @@ void scope_main()
         dur0= (double) (stop.tv_sec - start0.tv_sec) * 1000 + (double) (stop.tv_usec - start0.tv_usec) / 1000;
         
         if(dur>1500.0){
-            Write_Data(sock_send.sockfd,buff0,1);
+            printf("total triggers this cycle: %d",cumulative_triggers);
+            //Write_Data(sock_send.sockfd,buff0,1);
             //printf("%d\n",l);
 
             gettimeofday(&start, NULL);
-
+            cumulative_triggers=0;
         }
       
 
