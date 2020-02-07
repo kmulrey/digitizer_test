@@ -769,7 +769,7 @@ void soft_reset(){
     send_reset_message();
     scope_set_parameters(dig_mode_params,1);
     scope_set_parameters(readout_window_params,1);
-    
+    int i;
     
     for(i=0; i<nCh; i++){
         scope_set_parameters(ch_property_params[i],1);
