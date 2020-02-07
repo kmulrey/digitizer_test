@@ -156,7 +156,7 @@ int func_read_message(int sockfd1)
     //    printf("\n\nserver disconnected!!\n\n");
     //    end_param=1;
    // }
-
+    // why is this not commented?
     //printf("From server (%d)\n", len);
     
     if(buff[0]!=0x99){
