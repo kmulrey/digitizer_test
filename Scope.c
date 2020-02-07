@@ -758,7 +758,7 @@ void scope_main()
     //uint8_t buff[200];
 
     
-    scope_open();
+    //scope_open();
     uint8_t buff[200];
     uint32_t length = sizeof(buff);
     
