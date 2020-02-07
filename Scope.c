@@ -859,9 +859,9 @@ void scope_main()
             //printf("%d\n",l);
 
             gettimeofday(&start, NULL);
-            if(cumulative_triggers<MIN_TRIGGER_RATE){
-                soft_reset();
-            }
+            //if(cumulative_triggers<MIN_TRIGGER_RATE){
+            //    soft_reset();
+           // }
             
                 
             cumulative_triggers=0;
