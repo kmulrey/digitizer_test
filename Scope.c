@@ -280,9 +280,9 @@ int scope_read(int ioff)
         
         
         // find event rate per second;
-        unsigned short trigger_rate=0;
-        trigger_rate=gpsbuf[evgps-1].buf[25]<<8 | gpsbuf[evgps-1].buf[24] ;
-        printf("triggers this second:  %d\n",(int)trigger_rate);
+        int trigger_rate=0;
+        trigger_rate=int()(gpsbuf[evgps-1].buf[25]<<8 | gpsbuf[evgps-1].buf[24]);
+        printf("triggers this second:  %d\n",trigger_rate);
         cumulative_triggers=cumulative_triggers+trigger_rate;
         
        
@@ -824,7 +824,7 @@ void scope_main()
         dur= (double) (stop.tv_sec - start.tv_sec) * 1000 + (double) (stop.tv_usec - start.tv_usec) / 1000;
         dur0= (double) (stop.tv_sec - start0.tv_sec) * 1000 + (double) (stop.tv_usec - start0.tv_usec) / 1000;
         
-        if(dur>1500.0){
+        if(dur>3000.0){
             printf("total triggers this cycle: %d",cumulative_triggers);
             //Write_Data(sock_send.sockfd,buff0,1);
             //printf("%d\n",l);
