@@ -755,9 +755,19 @@ int check_trigger(uint8_t *buf){
 
 void soft_reset(){
     
-    printf("not enough triggers, doing a soft reset\n");
+    printf("\n\nnot enough triggers, doing a soft reset\n");
     
     
+    reset_params[0]=0x0399;
+    reset_params[1]=0x0008;
+    reset_params[2]=0x0100;
+    reset_params[3]=0x6666;
+
+  
+    
+    scope_write((uint8_t *)reset_params,reset_params[1]);
+    
+    sleep(2)
     //send_reset_message();
     scope_set_parameters(dig_mode_params,1);
     scope_set_parameters(readout_window_params,1);
@@ -767,7 +777,8 @@ void soft_reset(){
         scope_set_parameters(ch_property_params[i],1);
         scope_set_parameters(ch_trigger_params[i],1);
     }
-    
+    printf("done with reset\n\n\n");
+
     
     
 }
