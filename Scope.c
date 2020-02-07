@@ -270,7 +270,6 @@ int scope_read(int ioff)
     
     else if(rawbuf[1] == ID_PARAM_PPS) {
         ir = scope_read_pps(ioff);
-        //printf("raw buff: %x\n",rawbuf[2]);
         printf("----->PPS \n");
         if(evgps>0){
             //printf("gps number:    %lu\n",sizeof(gpsbuf[evgps-1].buf));
@@ -280,18 +279,19 @@ int scope_read(int ioff)
         
         
         
+        // find event rate per second;
+        unsigned short trigger_rate=0;
+        trigger_rate=msg[25]<<8 | msg[24] ;
+        print("triggers this second:  %d\n",(int)trigger_rate);
         
         
-        
-        //scope_calc_evnsec();
-       // printf("          %x\n",gpsbuf[evgps].buf[2]);
-        //gpsbuf[evgps]
+       
         return(ir);
     }
     else if(rawbuf[1] == ID_PARAM_EVENT)
     {
         ir=scope_read_event(ioff);
-        printf("----->EVENT!!!!  ");
+        //printf("----->EVENT!!!!  ");
         //printf(" event size: %lu\n",sizeof(gpsbuf2[*(shm_ev.next_write)-1].buf));
         //Write_Data(sock_send.sockfd,rawbuf);
         if(*(shm_ev.next_write)>0){
