@@ -769,7 +769,7 @@ void scope_main()
     unsigned short list_request=0x0C;
     int i;
     
-    
+    /*
     scope_set_parameters(dig_mode_params,1);
     scope_set_parameters(readout_window_params,1);
     
@@ -778,7 +778,7 @@ void scope_main()
         scope_set_parameters(ch_property_params[i],1);
         scope_set_parameters(ch_trigger_params[i],1);
     }
-    
+    */
 
  
     
@@ -804,7 +804,7 @@ void scope_main()
 
     while(1){
         
-        scope_read(1);
+        //scope_read(1);
 
         
         // sleep(1);
