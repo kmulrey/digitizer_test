@@ -96,7 +96,7 @@ void func_write(int sockfd)
         write(sockfd, buff, sizeof(buff));
         
         if ((strncmp(buff, "exit", 4)) == 0) {
-            //printf("Client Exit...\n");
+            printf("Something went bad with the server!!\n");
             break;
         }
         bzero(buff, sizeof(buff));
