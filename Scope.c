@@ -281,7 +281,7 @@ int scope_read(int ioff)
         
         // find event rate per second;
         unsigned short trigger_rate=0;
-        trigger_rate=msg[25]<<8 | msg[24] ;
+        trigger_rate=gpsbuf[evgps-1].buf[25]<<8 | gpsbuf[evgps-1].buf[24] ;
         print("triggers this second:  %d\n",(int)trigger_rate);
         
         
