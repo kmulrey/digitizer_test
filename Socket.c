@@ -148,8 +148,9 @@ int func_read_message(int sockfd1)
     //printf("\n\n");
     int exit=0;
     char buff[MAX];
+    int len=0;
     bzero(buff, MAX);
-    read(sockfd1, buff, sizeof(buff));
+    len=read(sockfd1, buff, sizeof(buff));
 
    // printf("\n\n    From server (%d): %x,  %x,  %x\n", sizeof(buff),buff[0],buff[1],buff[2]);
     
