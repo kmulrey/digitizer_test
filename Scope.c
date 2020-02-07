@@ -825,10 +825,10 @@ void scope_main()
         dur0= (double) (stop.tv_sec - start0.tv_sec) * 1000 + (double) (stop.tv_usec - start0.tv_usec) / 1000;
         
         if(dur>1500.0){
-            l=Write_Data(sock_send.sockfd,buff0,1);
-            
+            Write_Data(sock_send.sockfd,buff0,1);
+            //printf("%d\n",l);
+
             gettimeofday(&start, NULL);
-            printf("%d\n",l);
 
         }
       

@@ -258,8 +258,9 @@ void send_event(int sockfd){
 int Write_Data(int sockfd,uint8_t* data, int l)
 {
     int write_bytes;
+    int l=0;
     //printf("sizeof:   %lu  %d\n",sizeof(data), l);
-    write_bytes=write(sockfd,data,l) ;
-    //printf("write bytes=%d\n",write_bytes) ;
+    l=write_bytes=write(sockfd,data,l) ;
+    printf("write bytes=%d\n",l) ;
     return(write_bytes) ;
 }
