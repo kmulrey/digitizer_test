@@ -150,7 +150,7 @@ int func_read_message(int sockfd1)
     char buff[MAX];
     int len=0;
     bzero(buff, MAX);
-    len=read(sockfd1, buff, sizeof(buff));
+    len=read(sockfd1, buff, sizeof(buff)-1)
 
     printf("From server (%d)\n", len);
     
