@@ -856,7 +856,7 @@ void scope_main()
         dur= (double) (stop.tv_sec - start.tv_sec) * 1000 + (double) (stop.tv_usec - start.tv_usec) / 1000;
         dur0= (double) (stop.tv_sec - start0.tv_sec) * 1000 + (double) (stop.tv_usec - start0.tv_usec) / 1000;
         
-        if(dur>6000.0){
+        if(dur>15000.0){
             printf("total triggers this cycle: %d\n",cumulative_triggers);
             //Write_Data(sock_send.sockfd,buff0,1);
             //printf("%d\n",l);
