@@ -276,7 +276,7 @@
 #define PARAM_LIST_MAXSIZE 22   //!< maximal listsize 22 bytes
 
 
-#define MIN_TRIGGER_RATE 2000
+#define MIN_TRIGGER_RATE 2200
 
 
 
