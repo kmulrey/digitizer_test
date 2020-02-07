@@ -758,7 +758,7 @@ void soft_reset(){
     printf("not enough triggers, doing a soft reset\n");
     
     
-    send_reset_message();
+    //send_reset_message();
     scope_set_parameters(dig_mode_params,1);
     scope_set_parameters(readout_window_params,1);
     int i;
