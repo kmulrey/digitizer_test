@@ -157,7 +157,7 @@ int func_read_message(int sockfd1)
     printf("From server (%d)\n", len);
      if(len=0){
          printf("\n\nserver disconnected!!\n\n");
-         end_param=1;
+         exit=1;
     }
     
     if(buff[0]!=0x99){
