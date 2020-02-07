@@ -394,4 +394,3 @@ void read_fake_file(char* name);
 void scope_print_event(uint8_t *buf);
 int check_trigger(uint8_t *buf);
 void soft_reset();
-void send_reset_message();

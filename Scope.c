@@ -171,14 +171,6 @@ void scope_set_parameters(uint16_t *data, int to_shadow)
     }
 }
 
-send_reset_message(){
-    
-    int i=0;
-    
-
-}
-
-
 
 
 
