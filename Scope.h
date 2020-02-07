@@ -276,7 +276,7 @@
 #define PARAM_LIST_MAXSIZE 22   //!< maximal listsize 22 bytes
 
 
-
+#define MIN_TRIGGER_RATE 2000
 
 
 
@@ -393,3 +393,5 @@ uint8_t fake_event[MAX_READOUT];
 void read_fake_file(char* name);
 void scope_print_event(uint8_t *buf);
 int check_trigger(uint8_t *buf);
+void soft_reset();
+void send_reset_message();

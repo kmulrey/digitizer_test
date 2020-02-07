@@ -170,6 +170,18 @@ void scope_set_parameters(uint16_t *data, int to_shadow)
         printf("\n");
     }
 }
+
+send_reset_message(){
+    
+    int i=0;
+    
+
+}
+
+
+
+
+
 /*!
  \func int scope_raw_read(unsigned char *bf, int size)
  \brief reads data from digitizer and stores it in a buffer
@@ -281,7 +293,7 @@ int scope_read(int ioff)
         
         // find event rate per second;
         unsigned short trigger_rate=0;
-        trigger_rate=(gpsbuf[evgps-1].buf[24]<<8 | gpsbuf[evgps-1].buf[25]);
+        trigger_rate=(gpsbuf[evgps-1].buf[25]<<8 | gpsbuf[evgps-1].buf[25]);
         printf("triggers this second:  %d\n",(int)trigger_rate);
         cumulative_triggers=cumulative_triggers+(int)trigger_rate;
         
@@ -749,7 +761,24 @@ int check_trigger(uint8_t *buf){
     return trigg[0]<<3 | trigg[1]<<2 | trigg[2]<<1 | trigg[3];
 }
 
-
+void soft_reset(){
+    
+    printf("not enough triggers, doing a soft reset\n");
+    
+    
+    send_reset_message();
+    scope_set_parameters(dig_mode_params,1);
+    scope_set_parameters(readout_window_params,1);
+    
+    
+    for(i=0; i<nCh; i++){
+        scope_set_parameters(ch_property_params[i],1);
+        scope_set_parameters(ch_trigger_params[i],1);
+    }
+    
+    
+    
+}
 
 
 
@@ -830,6 +859,11 @@ void scope_main()
             //printf("%d\n",l);
 
             gettimeofday(&start, NULL);
+            if(cumulative_triggers<MIN_TRIGGER_RATE){
+                soft_reset();
+            }
+            
+                
             cumulative_triggers=0;
         }
       
