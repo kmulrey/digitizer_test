@@ -286,7 +286,7 @@ int scope_read(int ioff)
         // find event rate per second;
         unsigned short trigger_rate=0;
         trigger_rate=(gpsbuf[evgps-1].buf[25]<<8 | gpsbuf[evgps-1].buf[25]);
-        printf("triggers this second:  %d\n",(int)trigger_rate);
+        printf("triggers this second:  %x %d\n",trigger_rate,(int)trigger_rate);
         cumulative_triggers=cumulative_triggers+(int)trigger_rate;
         
        
