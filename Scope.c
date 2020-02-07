@@ -791,6 +791,7 @@ void scope_main()
   
     int c1=0;
     int r;
+    int l=0;
     unsigned char buff0[100];
     
     bzero(buff, sizeof(buff));
@@ -824,9 +825,10 @@ void scope_main()
         dur0= (double) (stop.tv_sec - start0.tv_sec) * 1000 + (double) (stop.tv_usec - start0.tv_usec) / 1000;
         
         if(dur>1500.0){
-            Write_Data(sock_send.sockfd,buff0,1);
+            l=Write_Data(sock_send.sockfd,buff0,1);
+            
             gettimeofday(&start, NULL);
-            //printf(".............\n");
+            printf("%d\n",l);
 
         }
       
