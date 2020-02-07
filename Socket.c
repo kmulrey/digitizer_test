@@ -260,7 +260,7 @@ int Write_Data(int sockfd,uint8_t* data, int l)
     int write_bytes;
     int l=0;
     //printf("sizeof:   %lu  %d\n",sizeof(data), l);
-    l=write_bytes=write(sockfd,data,l) ;
+    l=write(sockfd,data,l) ;
     printf("write bytes=%d\n",l) ;
     return(write_bytes) ;
 }
