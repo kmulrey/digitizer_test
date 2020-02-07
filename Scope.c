@@ -807,7 +807,6 @@ void scope_main()
         //scope_read(1);
 
         
-        // sleep(1);
 
         //Write_Data(sock_send.sockfd,buff0);
         r=func_read_message(sock_listen.sockfd);
@@ -823,14 +822,14 @@ void scope_main()
         gettimeofday(&stop, NULL);
         dur= (double) (stop.tv_sec - start.tv_sec) * 1000 + (double) (stop.tv_usec - start.tv_usec) / 1000;
         dur0= (double) (stop.tv_sec - start0.tv_sec) * 1000 + (double) (stop.tv_usec - start0.tv_usec) / 1000;
-        /*
+        
         if(dur>1500.0){
             Write_Data(sock_send.sockfd,buff0,1);
             gettimeofday(&start, NULL);
             //printf(".............\n");
 
         }
-      */
+      
 
         ///////////////////////////
       
