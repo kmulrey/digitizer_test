@@ -41,6 +41,16 @@ socket_connection sock_send;
 
 int main(int argc,char **argv){
     
+    
+    FILE *myFile;
+    myFile=fopen("ports.txt","r");
+    int p1;
+    int p2;
+    
+    fscanf(myFile,"%d",&p1);
+    fscanf(myFile,"%d",&p2);
+    printf("ports: %d  %d\n",p1,p2);
+
     ///*  remove for testing
     
     if(ad_shm_create(&shm_ev,BUFSIZE,sizeof(EV_DATA)/sizeof(uint16_t)) <0){ //ad_shm_create is in shorts!
@@ -77,8 +87,10 @@ int main(int argc,char **argv){
     
     initialize_parameter_lists();
     printf("checking initialization: %04x\n",ch_property_params[0][0]);
-    sock_send.port=PORT1;
-    sock_listen.port=PORT2;
+    //sock_send.port=PORT1;
+    //sock_listen.port=PORT2;
+    sock_send.port=p1;
+    sock_listen.port=p2;
     
     
     sleep(5);
