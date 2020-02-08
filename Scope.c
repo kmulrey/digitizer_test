@@ -841,6 +841,8 @@ void scope_main()
 
         
 
+        
+        
         //Write_Data(sock_send.sockfd,buff0);
         r=func_read_message(sock_listen.sockfd);
         if(r==1){
